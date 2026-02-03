@@ -6,12 +6,11 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { 
-  GamificationState, 
-  Reward, 
-  Achievement,
-  calculateLevel, 
-  xpForNextLevel 
+import {
+  GamificationState,
+  Reward,
+  calculateLevel,
+  xpForNextLevel
 } from '@sargam/types';
 
 interface GamificationStore extends GamificationState {

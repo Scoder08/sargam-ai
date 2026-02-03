@@ -40,7 +40,7 @@ interface PracticeSessionActions {
 }
 
 export function usePracticeSession(): [PracticeSessionState, PracticeSessionActions] {
-  const { startPractice, endPractice, addUserNote, clearUserInput, userInput } = 
+  const { startPractice, endPractice, addUserNote, clearUserInput } =
     useLessonStore();
 
   const [state, setState] = useState<PracticeSessionState>({

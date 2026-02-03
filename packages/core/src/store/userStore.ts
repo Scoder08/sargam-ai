@@ -38,7 +38,7 @@ const defaultPreferences: UserPreferences = {
 
 export const useUserStore = create<UserState>()(
   persist(
-    (set, get) => ({
+    (set, _get) => ({
       // Initial state
       user: null,
       profile: null,

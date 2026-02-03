@@ -81,16 +81,6 @@ interface AdminTutorial {
   };
 }
 
-interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    page: number;
-    perPage: number;
-    total: number;
-    totalPages: number;
-  };
-}
-
 interface CreateTutorialInput {
   title: string;
   titleHindi?: string;

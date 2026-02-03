@@ -5,7 +5,7 @@
  * Platform-agnostic - works on web and React Native.
  */
 
-import type { Note, NoteDuration, Chord, ChordType } from '@sargam/types';
+import type { Note, NoteDuration, ChordType } from '@sargam/types';
 
 /**
  * Convert note duration to beats (assuming quarter note = 1 beat)
