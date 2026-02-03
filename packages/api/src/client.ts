@@ -8,9 +8,7 @@
 import ky, { type KyInstance, type Options } from 'ky';
 
 // API configuration
-const API_URL = typeof window !== 'undefined' 
-  ? (window as any).__SARGAM_API_URL__ || 'http://localhost:8000'
-  : process.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const API_VERSION = 'v1';
 
