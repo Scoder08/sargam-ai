@@ -42,6 +42,10 @@ def create_app(config_class=None):
     # Register CLI commands
     _register_cli_commands(app)
 
+    # Auto-create database tables if they don't exist
+    with app.app_context():
+        db.create_all()
+
     return app
 
 
