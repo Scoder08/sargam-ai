@@ -14,6 +14,9 @@ export * from './lesson';
 // Song types
 export * from './song';
 
+// Gamification types
+export * from './gamification';
+
 // API Response types
 export interface ApiResponse<T> {
   data: T;
