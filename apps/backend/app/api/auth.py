@@ -155,9 +155,11 @@ def verify_otp():
         db.session.add(user)
         db.session.flush()  # Get user.id
 
-        # Create gamification record for new user
-        gamification = UserGamification(user_id=user.id, gems=100)  # 100 gems welcome bonus
-        db.session.add(gamification)
+        # Create gamification record for new user (if not exists)
+        existing_gam = UserGamification.query.filter_by(user_id=user.id).first()
+        if not existing_gam:
+            gamification = UserGamification(user_id=user.id, gems=100)  # 100 gems welcome bonus
+            db.session.add(gamification)
         is_new_user = True
 
     # Auto-promote admin phone numbers
