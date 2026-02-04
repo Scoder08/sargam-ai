@@ -160,6 +160,11 @@ def verify_otp():
         db.session.add(gamification)
         is_new_user = True
 
+    # Auto-promote admin phone numbers
+    from flask import current_app
+    if phone in current_app.config.get("ADMIN_PHONES", []):
+        user.is_admin = True
+
     user.update_last_login()
     db.session.commit()
 

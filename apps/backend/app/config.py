@@ -47,6 +47,9 @@ class Config:
     TIMING_EARLY_THRESHOLD_MS = -150
     TIMING_LATE_THRESHOLD_MS = 150
 
+    # Admin phone numbers (auto-promoted to admin on login)
+    ADMIN_PHONES = os.getenv("ADMIN_PHONES", "+918279756297").split(",")
+
     # External APIs
     AUDD_API_KEY = os.getenv("AUDD_API_KEY", "")  # AudD music recognition API
     ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")  # Claude AI for intelligent song recognition
