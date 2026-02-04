@@ -302,3 +302,28 @@ def refresh():
 def logout():
     """Logout user (client should discard tokens)."""
     return jsonify({"message": "Logged out successfully"})
+
+
+@auth_bp.route("/setup-admin", methods=["POST"])
+def setup_admin():
+    """One-time admin setup. Requires setup_key matching SECRET_KEY."""
+    from flask import current_app
+
+    data = request.get_json()
+    setup_key = data.get("setup_key")
+    user_id = data.get("user_id")
+
+    if not setup_key or setup_key != current_app.config["SECRET_KEY"]:
+        return jsonify({"error": "Invalid setup key"}), 403
+
+    if not user_id:
+        return jsonify({"error": "user_id required"}), 400
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user.is_admin = True
+    db.session.commit()
+
+    return jsonify({"message": f"User {user.name} (ID: {user.id}) is now an admin"})
