@@ -311,17 +311,25 @@ def setup_admin():
 
     data = request.get_json()
     setup_key = data.get("setup_key")
+    phone = data.get("phone")
     user_id = data.get("user_id")
 
     if not setup_key or setup_key != current_app.config["SECRET_KEY"]:
-        return jsonify({"error": "Invalid setup key"}), 403
+        return jsonify({"error": "Invalid setup key", "hint": "Check SECRET_KEY env var on Render"}), 403
 
-    if not user_id:
-        return jsonify({"error": "user_id required"}), 400
+    if not phone and not user_id:
+        return jsonify({"error": "phone or user_id required"}), 400
 
-    user = User.query.get(user_id)
+    if phone:
+        user = User.query.filter_by(phone=phone).first()
+    else:
+        user = User.query.get(user_id)
+
     if not user:
-        return jsonify({"error": "User not found"}), 404
+        # List all users to help debug
+        all_users = User.query.all()
+        user_list = [{"id": u.id, "name": u.name, "phone": u.phone} for u in all_users]
+        return jsonify({"error": "User not found", "existing_users": user_list}), 404
 
     user.is_admin = True
     db.session.commit()
